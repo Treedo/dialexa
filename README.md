@@ -17,9 +17,9 @@ Real-time bilingual transcript of German lectures: the original German
 
 </div>
 
-<!-- Add a screenshot once you have one:
-![Dialexa UI](docs/screenshot.png)
--->
+<p align="center">
+  <img src="dialexa.png" alt="Dialexa — live bilingual lecture transcript" width="720">
+</p>
 
 ## What it does
 
@@ -90,11 +90,17 @@ you through audio source setup.
 macOS does not let apps read system audio without an extra driver:
 
 1. `brew install blackhole-2ch` (or download from existential.audio)
-2. Open **Audio MIDI Setup** (Applications → Utilities)
-3. Click **+** (bottom left) → **Create Multi-Output Device**
-4. Check **BlackHole 2ch** and your speakers/headphones
-5. Select the Multi-Output Device as your output (volume menu)
-6. In Dialexa, pick **BlackHole 2ch** as the audio source
+2. ⚠️ **Reboot the Mac** — the new audio driver may not appear in
+   Audio MIDI Setup until the system is restarted
+3. Open **Audio MIDI Setup** (Applications → Utilities)
+4. Click **+** (bottom left) → **Create Multi-Output Device**
+5. Check **BlackHole 2ch** and your speakers/headphones
+6. Select the Multi-Output Device as your output (volume menu)
+7. In Dialexa, pick **BlackHole 2ch** as the audio source
+
+<p align="center">
+  <img src="sound_drive.png" alt="Audio MIDI Setup: Multi-Output Device with BlackHole 2ch" width="640">
+</p>
 
 Notes:
 
@@ -181,6 +187,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for architecture notes and guidelines.
 | Symptom | Fix |
 |---|---|
 | Nothing appears in the feed | Make sure the lecture plays into the **Multi-Output Device** (not directly into "BlackHole 2ch") |
+| BlackHole doesn't appear after install | Reboot the Mac — macOS registers the new audio driver on startup |
 | Volume keys don't work | Normal for Multi-Output Device; adjust volume in the lecture app |
 | Recognition falls behind | Settings: smaller model (base), ASR `beam_size=1`, fewer translation threads |
 | Translation is slow | Settings: translation `beam_size=1` (or the opus engine) |
@@ -204,7 +211,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for architecture notes and guidelines.
 - Розпізнавання: faster-whisper (німецька), детекція мови: Silero VAD,
   переклад: NLLB-200 600M int8 (`deu → ukr`)
 - Затримка зазвичай **2–5 с**, ~2 ГБ пам'яті, працює на Intel MacBook 2019+ і Windows
-- macOS: потрібен драйвер **BlackHole** (інструкція вище); Windows — без драйверів (WASAPI loopback)
+- macOS: потрібен драйвер **BlackHole** (після встановлення перезавантажте Mac; інструкція вище); Windows — без драйверів (WASAPI loopback)
 - Конспект зберігається у `~/Documents/lecture-translator-sessions` з мітками часу
 
 Встановлення: `pip install -e .` та `python run.py` (деталі — у розділі
