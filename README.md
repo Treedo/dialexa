@@ -55,6 +55,23 @@ All models run locally — the internet is needed only once, to download them
 
 ## Installation
 
+### Ready-to-use build (no Python needed)
+
+Prebuilt apps are attached to [GitHub Releases](https://github.com/Treedo/dialexa/releases):
+
+- **macOS 12+ (Intel)** — `Dialexa-<version>-macos-x86_64.zip`
+  (runs on Apple Silicon via Rosetta; a native arm64 build is planned)
+- Windows build — coming soon
+
+To install on macOS: download the zip, unpack it, move `Dialexa.app` to
+`/Applications`, and open it. Because the bundle is ad-hoc signed, the first
+launch is **right-click → Open** (or `xattr -cr Dialexa.app` in the terminal).
+
+> ⚠️ The BlackHole driver is still required on macOS (see below) — it cannot
+> be bundled into the app. Models (~1.7 GB) are downloaded on first launch.
+
+### From source
+
 Requires **Python 3.11+**.
 
 ```bash

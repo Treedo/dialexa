@@ -3,6 +3,7 @@
 
 Збірка: tools/build_macos_app.sh (або python -m PyInstaller packaging/dialexa.spec)
 """
+import tomllib
 from pathlib import Path
 
 from PyInstaller.utils.hooks import collect_data_files
@@ -13,6 +14,10 @@ if SPEC_DIR.suffix == ".spec":
     SPEC_DIR = SPEC_DIR.parent
 ROOT = SPEC_DIR                             # packaging/
 PROJECT = ROOT.parent                       # корінь репозиторію
+
+# Єдине джерело версії — pyproject.toml (щоб не розходилося з тегом релізу)
+with (PROJECT / "pyproject.toml").open("rb") as f:
+    VERSION = tomllib.load(f)["project"]["version"]
 
 # Рантайм-дані: cffi-заголовки soundcard (coreaudio.py.h) читаються з диска,
 # faster_whisper несе mel_filters.npz / silero VAD-модель у пакеті.
@@ -66,7 +71,7 @@ app = BUNDLE(
     bundle_identifier="com.dialexa.translator",
     info_plist={
         "CFBundleDisplayName": "dialexa",
-        "CFBundleShortVersionString": "0.2.0",
+        "CFBundleShortVersionString": VERSION,
         "NSHighResolutionCapable": True,
         # дозвіл на запис звуку (TCC) для пристроїв-мікрофонів
         "NSMicrophoneUsageDescription": "Dialexa записує звук лекції для перекладу.",
