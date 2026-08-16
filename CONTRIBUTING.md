@@ -9,7 +9,7 @@ translations, docs, and code.
 ## Getting started
 
 ```bash
-git clone https://github.com/<your-username>/lecture-translator.git
+git clone https://github.com/Treedo/dialexa.git
 cd lecture-translator
 python3 -m venv .venv
 .venv/bin/pip install -e ".[dev]"   # Windows: .venv\Scripts\pip install -e ".[dev]"

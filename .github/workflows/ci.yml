@@ -22,8 +22,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install system dependencies
-        # soundcard потребує PortAudio; libegl1 — для PySide6 на headless runner
-        run: sudo apt-get update && sudo apt-get install -y libportaudio2 libegl1
+        # libegl1 — для PySide6 на headless runner; звукові бібліотеки не потрібні:
+        # soundcard імпортується ліниво і тести його не чіпають
+        run: sudo apt-get update && sudo apt-get install -y libegl1
 
       - name: Install package
         run: pip install -e ".[dev]"

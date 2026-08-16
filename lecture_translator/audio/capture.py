@@ -12,7 +12,10 @@ import threading
 import time
 
 import numpy as np
-import soundcard as sc
+
+# soundcard імпортується ліниво у функціях: на Linux він вже при імпорті
+# чіпляє libpulse.so, а модуль має імпортуватися і без нього
+# (файловий режим, тести, headless-CI).
 
 from ..audio.resample import StreamingResampler, TARGET_RATE
 from ..queues import RingBuffer
@@ -30,6 +33,8 @@ def list_input_devices() -> list[dict]:
     Windows: мікрофони + loopback-пристрої виходів (позначені [Loopback]).
     """
     out = []
+    import soundcard as sc  # ліниво: на Linux потребує libpulse.so
+
     # loopback підтримується soundcard лише на Windows (WASAPI); на macOS
     # його роль виконує BlackHole як звичайний вхідний пристрій.
     include_loopback = platform.system() == "Windows"
@@ -71,6 +76,8 @@ def resolve_device(configured: str | None, devices: list[dict] | None = None) ->
     (macOS) -> loopback (Windows) -> системний мікрофон.
     """
     devices = list_input_devices() if devices is None else devices
+    import soundcard as sc  # ліниво: на Linux потребує libpulse.so
+
     names = {d["name"] for d in devices}
     if configured and configured in names:
         return configured
@@ -100,6 +107,8 @@ def _open_recorder(device_id: str | None):
     name = resolve_device(device_id)
     if not name:
         raise RuntimeError("Не знайдено жодного вхідного аудіопристрою")
+    import soundcard as sc  # ліниво: на Linux потребує libpulse.so
+
     mic = sc.get_microphone(name)
     last_err: Exception | None = None
     for rate in _TRIED_RATES:

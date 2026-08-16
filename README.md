@@ -11,7 +11,7 @@ Real-time bilingual transcript of German lectures: the original German
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org/)
-[![CI](https://github.com/treedo/lecture-translator/actions/workflows/ci.yml/badge.svg)](https://github.com/treedo/lecture-translator/actions/workflows/ci.yml)
+[![CI](https://github.com/Treedo/dialexa/actions/workflows/ci.yml/badge.svg)](https://github.com/Treedo/dialexa/actions/workflows/ci.yml)
 [![Platform: macOS](https://img.shields.io/badge/macOS-%F0%9F%8D%8E-silver.svg)]()
 [![Platform: Windows](https://img.shields.io/badge/Windows-%F0%9F%AA%9F-blue.svg)]()
 
@@ -58,7 +58,7 @@ All models run locally — the internet is needed only once, to download them
 Requires **Python 3.11+**.
 
 ```bash
-git clone https://github.com/treedo/lecture-translator.git
+git clone https://github.com/Treedo/dialexa.git
 cd lecture-translator
 python3 -m venv .venv
 .venv/bin/pip install -e .          # Windows: .venv\Scripts\pip install -e .
