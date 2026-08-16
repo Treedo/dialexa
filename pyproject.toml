@@ -1,0 +1,56 @@
+[project]
+name = "lecture-translator"
+version = "0.1.0"
+description = "Live German-to-Ukrainian lecture translation — fully local (VAD -> faster-whisper -> NLLB)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "treedo", email = "s@treedo.name"}]
+keywords = ["translation", "asr", "whisper", "nllb", "german", "ukrainian", "speech-to-text", "live-translation", "desktop"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: MacOS X",
+    "Environment :: Win32 (MS Windows)",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: German",
+    "Natural Language :: Ukrainian",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Education",
+    "Topic :: Multimedia :: Sound/Audio :: Speech",
+]
+dependencies = [
+    "PySide6>=6.7.3",
+    "soundcard>=0.4.3",
+    "faster-whisper>=1.0.3",
+    "ctranslate2>=4.4.0",
+    "onnxruntime>=1.17",
+    "sentencepiece>=0.2.0",
+    "samplerate>=0.2.1",
+    "av>=12.0.0",
+    "numpy>=1.26",
+    "huggingface_hub>=0.24",
+    "platformdirs>=4.2",
+    "psutil>=5.9",
+    "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pyinstaller>=6.10"]
+
+[project.scripts]
+lecture-translator = "lecture_translator.app:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["lecture_translator*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+packaging/dialexa.icns
+packaging/dialexa.iconset/
+
+# macOS
+.DS_Store
